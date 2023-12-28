@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+            <record id="classification_reports_view_form" model="ir.ui.view">
+            <field name="name">classification_reports_view_form</field>
+            <field name="model">classification.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Classification Reports">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="start_date"/>
+
+                            </group>
+                            <group>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="action_calculate_classification" type="object" string="View" class="oe_highlight"/>
+                            <button name="action_print_pdf" type="object" string="Print Pdf"/>
+                            <button string="Cancel" class="btn-default" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="classification_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Points of Sale Classification Report </field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">classification.report.wizard</field>
+            <field name="target">new</field>
+            <field name="view_mode">form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="classification_report_menu_wizard" name="Points of Sale Classification Report" parent="point_of_sale_valuation.branches_classifications_menu" action="classification_report_wizard_action"/>
+    </data>
+</odoo>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_barcode_config_view" model="ir.ui.view">
+            <field name="name">Automatic Barcode Configuration</field>
+            <field name="model">product.barcode.configuration</field>
+            <field name="arch" type="xml">
+                <form string="Barcode Configuration" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="apply" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="suffixs" />
+                                <field name="include_template_barcode"/>
+                                 <div class="alert alert-warning" invisible="include_template_barcode != True" colspan="2" role="alert">
+                                        <p>
+                                            Remember to add product templates barcode field
+                                        </p>
+                                    </div>
+                                <field name="include_company_short_code"/>
+                                 <div class="alert alert-warning" invisible="include_company_short_code != True"  colspan="2" role="alert">
+                                        <p>
+                                            Remember to add company short code in company form
+                                        </p>
+
+                                    </div>
+                                <field name="include_category_short_code" string="Include Category Short Code"/>
+                                 <div class="alert alert-warning" invisible="include_category_short_code != True"  colspan="2" role="alert">
+                                        <p>
+                                            Remember to add category short code in category form
+                                        </p>
+                                    </div>
+                            </group>
+                                <br/>
+                                <br/>
+                             <div  colspan="2" >
+                                        <p>
+                                            Barcode value is computed as following
+                                            <br/>
+                                            1 - Prefix Value
+                                            <br/>
+                                            2 - Company Short Code
+                                            <br/>
+                                            3 - Category Short Code
+                                            <br/>
+                                            4 - Template Barcode
+                                            <br/>
+                                            5 - Automatic Generated Sequence
+                                        </p>
+
+                                    </div>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_barcode_config" model="ir.actions.act_window">
+            <field name="name">Barcode Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.barcode.configuration</field>
+            <field name="res_id" ref="product_automatic_barcode.default_barcode_configuration"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="product_barcode_config_menus" name="Automatic Barcode Configuration" parent="stock.menu_stock_config_settings" action="action_barcode_config" sequence="200" groups="stock.group_stock_manager"/>
+    </data>
+</odoo>

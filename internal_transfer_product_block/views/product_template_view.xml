@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="product_template_form_kaz222" model="ir.ui.view">
+            <field name="name">product.template.purchase.button.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_tooltip']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="temp_is_blocked"/>
+                    <field name="temp_block_note" string="" invisible="temp_is_blocked != True"/>
+                    <field name="temp_blocked_wherehouse_ids" widget="many2many_tags" invisible="temp_is_blocked != True" />
+                    <field name="temp_warehouse_note" string="" invisible="temp_is_blocked != True" />
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_product_form_kaz" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='detailed_type']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <field name="prod_is_blocked" />
+                     <field name="prod_blocked_wherehouse" widget="many2many_tags" invisible="prod_is_blocked != True" />
+                        <field name="temp_warehouse_note" string=""  invisible="prod_is_blocked != True" />
+
+
+                </xpath>
+
+            </field>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="product_product_view_form_easy_kaz" model="ir.ui.view">
+            <field name="name">product.product.view.form.easy</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='barcode']" position="after">
+                   <field name="prod_is_blocked" />
+                     <field name="prod_blocked_wherehouse" widget="many2many_tags"  invisible="prod_is_blocked != True" />
+                            <field name="temp_warehouse_note" string=""  invisible="prod_is_blocked != True" />
+
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

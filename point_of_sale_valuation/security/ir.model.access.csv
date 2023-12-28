@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_warehouses_class,kaz_warehouses_class,model_warehouses_class,,1,1,1,1
+access_warehouses_target,kaz_warehouses_target,model_warehouses_target,,1,1,1,1
+access_branches_classification,kaz_branches_classification,model_branches_classification,,1,1,1,1
+access_classification_report_wizard,kaz_classification_report_wizard,model_classification_report_wizard,,1,1,1,1

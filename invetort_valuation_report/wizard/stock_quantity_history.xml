@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="stock_quantity_history_form_inherit" model="ir.ui.view">
+            <field name="name">stock.quantity.history.inherit.form</field>
+            <field name="model">stock.quantity.history</field>
+            <field name="inherit_id" ref="stock.view_stock_quantity_history"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='inventory_datetime']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='open_at_date']" position="after">
+                    <field name="valuation_report" invisible="1"/>
+                    <button name="print_valuation_report" type="object" string="Print Pdf" invisible="valuation_report != True"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

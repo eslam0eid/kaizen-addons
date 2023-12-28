@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="branches_target_view_tree" model="ir.ui.view">
+            <field name="name">branches_target_view_tree</field>
+            <field name="model">warehouses.target</field>
+            <field name="arch" type="xml">
+                <tree string="Branches Targets" editable="bottom">
+
+                    <field name="warehouse_id" />
+                    <field name="target" />
+                </tree>
+            </field>
+        </record>
+        <record id="branches_targets_action" model="ir.actions.act_window">
+            <field name="name">Points of Sale Targets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">warehouses.target</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="branches_target_menu" name="Points of Sale Targets" parent="point_of_sale_valuation.branches_classifications_menu" action="branches_targets_action" sequence="1"/>
+    </data>
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="report_branches_classification">
+            <t t-call="web.html_container">
+             <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-size:15px;">
+                            <div class="text-center">
+                                <span style="font-weight:bold;margin-top:4px;font-size:22px">Point of Sale Valuation Report </span>
+                            </div>
+                            <br/>
+                        <div class="row">
+                            <div class="text-center" style="font-size:20px;text-align:center">
+                                <span style="margin-right:25px">From:</span>
+                                <span t-esc="o.start_date"/>
+                                <span>To:</span>
+                                <span t-esc="o.end_date"/>
+                            </div>
+                            </div>
+                            <br/>
+                            <br/>
+
+
+                             <table class="table table-bordered table-sm" align="center" style="border:1pt solid black;width:98%;margin-bottom:5px;font-size:18px" dir="rtl">
+                                <tr class="text-center" style="background-color:#9BA6D5;height:25px">
+                                    <td  class="text-center">Warehouse</td>
+                                    <td  class="text-center">Month</td>
+                                    <td  class="text-center">Total Sales</td>
+                                    <td  class="text-center">Total Refund</td>
+                                    <td class="text-center" >Total</td>
+                                    <td  class="text-center">Target</td>
+                                    <td  class="text-center">Percentage </td>
+                                    <td  class="text-center">Classification</td>
+                                </tr>
+
+
+                                <t t-set="datas" t-value="o.get_report_pdf_data()"/>
+
+                                 <t t-foreach="datas" t-as="data">
+                                      <tr class="text-center">
+                                        <td class="text-center"> <t t-esc="data['name']"/></td>
+                                        <td class="text-center"><t t-esc="data['classification_month']"/></td>
+                                        <td class="text-center"><t t-esc="data['total_sales']"/></td>
+                                        <td class="text-center"> <t t-esc="data['total_refund']"/></td>
+                                        <td class="text-center"><t t-esc="data['total']"/></td>
+                                        <td class="text-center"><t t-esc="data['target']"/></td>
+                                        <td class="text-center"><t t-esc="data['percentage']"/></td>
+                                        <td class="text-center"><t t-esc="data['classification']"/></td>
+                                      </tr>
+                                 </t>
+
+                            </table>
+
+
+			</div>
+                </t>
+             </t>
+		</t>
+	</template>
+
+         <record id="action_report_classification_pdf" model="ir.actions.report">
+            <field name="name">Print Classification Report</field>
+            <field name="model">classification.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">point_of_sale_valuation.report_branches_classification</field>
+            <field name="report_file">point_of_sale_valuation.report_branches_classification</field>
+            <field name="print_report_name">('Points of Sale Classification' )</field>
+            <field name="binding_model_id" ref="model_classification_report_wizard"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

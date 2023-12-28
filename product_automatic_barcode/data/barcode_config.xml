@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+       <record id="default_barcode_configuration" model="product.barcode.configuration">
+           <field name="suffixs"></field>
+           <field name="include_company_short_code" eval="False" />
+           <field name="include_template_barcode" eval="False" />
+           <field name="include_category_short_code" eval="False" />
+       </record>
+</odoo>

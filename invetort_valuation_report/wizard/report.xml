@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="report_inventory_valuation_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="company">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <div class="text-center">
+                                <h2>
+                                    Inventory Valuation Report
+                                </h2>
+                                <br/>
+                                <span t-esc="docs.inventory_datetime"/>
+                            </div>
+                            <br/>
+                            <div style="text-align:left">
+                             <table class="table table-sm o_main_table" name="invoice_line_table">
+
+                                   <thead>
+                                       <tr>
+                                           <th name="th_date" class="text-center"><span>Date</span></th>
+                                           <th name="th_product" class="text-center"><span>Product</span></th>
+                                           <th name="th_quantity" class="text-center"><span>Quantity</span></th>
+                                           <th name="th_uom" class="text-center"><span>UoM</span></th>
+                                           <th name="th_total" class="text-center">
+                                               <span>Total Value</span>
+                                           </th>
+                                       </tr>
+                                   </thead>
+                                   <tbody class="invoice_tbody">
+                                       <t t-set="total" t-value="0"/>
+                                       <t t-foreach="docs.get_report_data()" t-as="line">
+                                          <tr>
+                                           <td class="text-center">
+                                               <span t-esc="line.create_date.strftime('%Y-%m-%d %H:%M')"/>
+                                           </td>
+                                           <td class="text-center">
+                                               <span t-esc="line.product_id.display_name"/>
+                                           </td>
+                                           <td class="text-center">
+                                               <span t-esc="line.quantity"/>
+                                           </td>
+                                           <td class="text-center">
+                                               <span t-esc="line.uom_id.name"/>
+                                           </td>
+                                           <td class="text-center">
+                                               <span t-esc="line.value"/>
+                                           </td>
+                                              <t t-set="total" t-value="total + line.value"/>
+                                        </tr>
+
+                                       </t>
+
+                                   </tbody>
+                            </table>
+                         </div>
+
+                        </div>
+                         <div class="clearfix">
+                            <div id="total" class="row" style="margin:25px">
+                                <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm- col-md-6'} ml-auto">
+                                    <table class="table table-sm" style="page-break-inside: avoid;">
+                                         <tr >  <td>
+                                             Total
+                                         </td>
+                                                <td class="text-right">
+                                                    <span t-esc="total"/>
+                                                </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                         </div>
+
+                    </t>
+                </t>
+            </t>
+
+        </template>
+         <record id="stock_inventory_valuation_report" model="ir.actions.report">
+            <field name="name">Inventory Valuation</field>
+            <field name="model">stock.quantity.history</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">invetort_valuation_report.report_inventory_valuation_report_template</field>
+            <field name="report_file">invetort_valuation_report.report_inventory_valuation_report_template</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="binding_model_id" ref="model_stock_quantity_history"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

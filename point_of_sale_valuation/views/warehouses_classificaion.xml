@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="branches_classification_view_tree" model="ir.ui.view">
+            <field name="name">branches_classification_view_tree</field>
+            <field name="model">branches.classification</field>
+            <field name="arch" type="xml">
+                <tree string="Branches Classifications" create="0" import="0" >
+                    <header >
+                        <button name="action_calculate_classification" string="Classify" class="oe_highlight" type="object" />
+                    </header>
+                    <field name="warehouse_id"/>
+                    <field name="classification_month"/>
+                    <field name="total_sales"/>
+                    <field name="total_refund"/>
+                    <field name="total"/>
+                    <field name="target"/>
+                    <field name="percentage"/>
+                    <field name="classification"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="branches_classification_view_form" model="ir.ui.view">
+            <field name="name">branches_classification_view_form</field>
+            <field name="model">branches.classification</field>
+            <field name="arch" type="xml">
+                <form string="Branches Classifications" edit="0" create="0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="warehouse_id"/>
+                                <field name="total_sales"/>
+                                <field name="total_refund"/>
+                                <field name="total"/>
+
+                                <field name="classification_month"/>
+                            </group>
+                            <group>
+                                <field name="target"/>
+                                <field name="percentage"/>
+                                <field name="classification"/>
+                            </group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="branches_classifications_actions" model="ir.actions.act_window">
+            <field name="name">Points of Sale Classifications</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">branches.classification</field>
+<!--            <field name="context">{'default_group_by': 'classification_month'}</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="warehouses_classifications" name="Points of Sale Classification" parent="point_of_sale_valuation.branches_classifications_menu" action="branches_classifications_actions" sequence="3"/>
+    </data>
+</odoo>

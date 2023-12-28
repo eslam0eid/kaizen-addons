@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+      <record id="warehouses_classes_view_tree" model="ir.ui.view">
+          <field name="name">branches_classes_view_tree</field>
+          <field name="model">warehouses.class</field>
+          <field name="arch" type="xml">
+              <tree string="Branches Classes" editable="bottom">
+                  <field name="name" />
+                  <field name="percent_from" />
+                  <field name="percent_to" />
+              </tree>
+          </field>
+      </record>
+    <record id="warehouses_classes_action" model="ir.actions.act_window">
+        <field name="name">Points of Sale Classes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">warehouses.class</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+      <menuitem id="branches_classifications_menu" name="Points of Sale Classification" parent="point_of_sale.menu_point_rep" sequence="100"/>
+      <menuitem id="branches_classes_menu" name="Points of Sale Classes" parent="branches_classifications_menu" action="warehouses_classes_action" sequence="2"/>
+  </data>
+</odoo>
